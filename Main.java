@@ -28,12 +28,15 @@ public class Main {
                     System.out.print("Quantidada para saída: ");
                     int quantidadeSaida = sc.nextInt();
 
-                    if (quantidadeSaida > 0 && quantidadeSaida <= estoque) {
+                    if (quantidadeSaida <= 0) {
+                        System.out.println("A quantidade para a saída deve ser maior que zero");
+                    } else if (quantidadeSaida > estoque) {
+                        System.out.println("Estoque insuficiente! Disponível: " + estoque);
+                    } else {
                         estoque -= quantidadeSaida;
                         unidadesMovimentadas += quantidadeSaida;
                         totalSaidas++;
-                    } else {
-                        System.out.println("Valor insuficiente!");
+                        System.out.println("Saída registrada com sucesso!");
                     }
                 }
 
@@ -45,6 +48,7 @@ public class Main {
                         estoque += quantidadeRepor;
                         unidadesMovimentadas += quantidadeRepor;
                         totalReposicoes++;
+                        System.out.println("Reposição registrada com sucesso!");
                     } else {
                         System.out.println("O valor digitado tem que ser maior que zero!");
                     }
@@ -58,11 +62,9 @@ public class Main {
                     System.out.println(consulta);
                 }
 
-                default -> {
-                    System.out.println("Você digitou uma opção que não tem!");
-                    System.out.print("Digite uma opção novamente: ");
-                    opcao = sc.nextInt();
-                }
+                case 0 -> System.out.println("Encerrando turno...");
+
+                default -> System.out.println("Você digitou uma opção que não tem!");
             }
         } while (opcao != 0);
 
